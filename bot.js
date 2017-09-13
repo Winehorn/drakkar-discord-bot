@@ -13,7 +13,7 @@ client.on('ready', () => {
 client.on('message', message => {
 
     // Check for prefix and not-botness
-    if(!message.startsWith(prefix) || message.author.bot) return;
+    if(!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
