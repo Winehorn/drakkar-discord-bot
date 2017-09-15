@@ -18,7 +18,7 @@ client.on('message', message => {
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
 
-    let runnable = commands.filter( obj => {return obj.command === command})[0];
+    let runnable = commands.list.filter( obj => {return obj.command === command})[0];
     runnable.run(client, message, args);
 
 });
