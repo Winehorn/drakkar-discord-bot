@@ -28,9 +28,10 @@ const commands = {
 
                     // Specific command
                     else if (commands.list.indexOf(args[0]) > -1) {
-                        let command = commands.list.filter(obj => {
+                       /* let command = commands.list.filter(obj => {
                             return obj.command === args[0]
-                        })[0];
+                        })[0];*/
+                       let command = commands.list[commands.list.indexOf(args[0])].command;
                         reply += command.usage + "\t" + command.description;
                     }
 
