@@ -20,14 +20,14 @@ const commands = {
 
                     // No specific command
                     if (!args) {
-                        commands.forEach(command => {
+                        commands.list.forEach(command => {
                             reply += command.usage + "\t" + command.description + "\n";
                         })
 
                     }
 
                     // Specific command
-                    else if (commands.indexOf(args[0]) > -1) {
+                    else if (commands.list.indexOf(args[0]) > -1) {
                         let command = commands.list.filter(obj => {
                             return obj.command === args[0]
                         })[0];
