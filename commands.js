@@ -19,7 +19,7 @@ const commands = {
                     let reply = "";
 
                     // No specific command
-                    if (!args) {
+                    if (args.length === 0) {
                         commands.list.forEach(command => {
                             reply += command.usage + "\t" + command.description + "\n";
                         })
