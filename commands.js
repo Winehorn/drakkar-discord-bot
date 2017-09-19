@@ -3,47 +3,55 @@ const commands = {
     list:
         [
             {
-                command: "ping",
-                description: "Bot answers with \"Pong!\"",
-                usage: "ping",
+                command: 'ping',
+                description: 'Bot answers with \'Pong!\'',
+                usage: 'ping',
                 run: (client, msg, args) => {
-                    msg.reply("Pong!");
+                    msg.reply('Pong!');
                 }
             },
 
             {
-                command: "help",
-                description: "Shows available commands or help for specific command",
-                usage: "help [command]",
+                command: 'help',
+                description: 'Shows available commands or help for specific [command]',
+                usage: 'help [command]',
                 run: (client, msg, args) => {
-                    let reply = "";
+                    let reply = '';
 
                     // No specific command
                     if (args.length === 0) {
                         commands.list.forEach(command => {
-                            reply += command.usage + "\t" + command.description + "\n";
-                        })
-
+                            reply += '\n' + command.usage + '\t ++ ' + command.description;
+                        });
+                        return msg.reply(reply);
                     }
 
-                    // Specific command
-                    else if (commands.list.indexOf(args[0]) > -1) {
-                       /* let command = commands.list.filter(obj => {
-                            return obj.command === args[0]
-                        })[0];*/
-                       let command = commands.list[commands.list.indexOf(args[0])].command;
-                        reply += command.usage + "\t" + command.description;
-                    }
-
-                    // Command not found
                     else {
-                        reply += "Your command was not found. Try \"help\" to get a list of available commands"
+                        let foundCommand = getByCommand(commands.list, args[0]);
+
+                        // Specific command
+                        if (foundCommand) {
+                            reply += foundCommand.usage + '\t ++ ' + foundCommand.description;
+                            return msg.reply(reply);
+                        }
+
+                        // Command not found
+                        reply += 'Your command was not found. Try \'help\' to get a list of available commands'
+                        return msg.reply(reply);
                     }
 
-                    return msg.reply(reply);
                 }
             }
         ]
 };
+
+function getByCommand(arr, value) {
+
+    for (var i=0, iLen=arr.length; i<iLen; i++) {
+
+        if (arr[i].command === value) return arr[i];
+    }
+
+}
 
 module.exports = commands;

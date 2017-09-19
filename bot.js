@@ -7,7 +7,7 @@ const prefix = process.env.PREFIX;
 
 
 client.on('ready', () => {
-    console.log('I am ready!');
+    console.log('I am the testbot!');
 });
 
 client.on('message', message => {
