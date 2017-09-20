@@ -8,6 +8,7 @@
   },
   "scripts": {},
   "dependencies": {
-    "discord.js": "^11.2.1"
+    "discord.js": "^11.2.1",
+    "gw2api-client": "^5.6.5"
   }
 }
