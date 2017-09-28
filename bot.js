@@ -19,7 +19,11 @@ client.on('message', message => {
     const command = args.shift().toLowerCase();
 
     let runnable = commands.list.filter( obj => {return obj.command === command})[0];
-    runnable.run(client, message, args);
+    if(runnable) {
+        runnable.run(client, message, args);
+    } else {
+        message.reply('this is not a valid command. Try \'' + process.env.PREFIX + 'help\' for more information!');
+    }
 
 });
 

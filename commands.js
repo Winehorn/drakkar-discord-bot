@@ -1,3 +1,5 @@
+const gw = require('./gw');
+
 const commands = {
 
     list:
@@ -41,13 +43,34 @@ const commands = {
                     }
 
                 }
+            },
+
+            {
+                command: 'auth',
+                description: 'Provide your GW2 API-Key to get authenticated',
+                usage: 'auth [apikey]',
+                run: (client, msg, args) => {
+                    if (args.length === 0) {
+                        return msg.reply(this.description);
+                    }
+                    gw.getHomeServerID(args[0], serverID => {
+                        if ( process.env.HOMEWORLD_ID.toString() === serverID.toString() ) {
+                            msg.reply('you\'re a Drakkari! :kissing_smiling_eyes:');
+                            let role = msg.guild.roles.find('name', 'Drakkari');
+                            msg.member.addRole(role).catch(err => console.log(err));
+                        } else {
+                            msg.reply('you\'re not a Drakkari! :dizzy_face:');
+                        }
+
+                    });
+                }
             }
         ]
 };
 
 function getByCommand(arr, value) {
 
-    for (var i=0, iLen=arr.length; i<iLen; i++) {
+    for (let i=0, iLen=arr.length; i<iLen; i++) {
 
         if (arr[i].command === value) return arr[i];
     }
